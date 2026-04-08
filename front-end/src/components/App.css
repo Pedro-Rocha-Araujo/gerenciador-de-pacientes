@@ -1,0 +1,158 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+  color: #fff;
+  background-color: #1661d3;
+  padding: 2.5rem 4rem;
+}
+
+main {
+  width: 98%;
+  margin: auto;
+}
+
+section.sec-cadastro {
+  padding: 2.5rem 0;
+}
+
+h1 {
+  font-size: clamp(2.1rem, 8vw, 2.8rem);
+}
+
+section h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: clamp(1.5rem, 6vw, 2.1rem);
+}
+
+section form{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+section .campo-input label{
+  font-size: clamp(1rem, 3vw, 1.1rem);
+  margin-right: 5px;
+}
+
+section input[type="text"]{
+  outline: none;
+  padding: 3px;
+  font-size: 1.1rem;
+  width: 100%;
+  max-width: 220px;
+}
+
+section button {
+  border: none;
+  border-radius: 1rem;
+  color: #fff;
+  padding: 0.4rem 0.8rem;
+}
+
+.btn-adcionar {
+  color: #116e43;
+  background-color: transparent;
+  border: 1px solid #116e43;
+  padding: 8px 14px;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.btn-adcionar:hover {
+  background-color: #116e43;
+  color: #fff;
+}
+
+section.sec-cadastrados {
+  padding: 3rem 0 1rem 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+section.sec-cadastrados div {
+  width: 100%;
+  max-width: 750px;
+}
+
+section.sec-cadastrados table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th{
+  background-color: #1661d3;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+td, th {
+  font-size: clamp(0.8rem, 2vw, 1.05rem);
+  border: 1px solid black;
+  padding: 0.6rem;
+}
+
+.btn-editar {
+  border: none;
+  background-color: #1661d3;
+}
+
+.btn-deletar {
+  background-color: #d32c16;
+  margin-left: 4px;
+}
+
+@media screen and (max-width: 1250px) {
+  h1 {
+    text-align: center;
+  }
+  form{
+    flex-direction: column;
+  }
+  td, th{
+    padding: 8px 12px;
+
+  }
+  label{
+    display: inline-block;
+    width: 72px;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  thead {
+    display: none;
+  }
+  td th {
+    border: none;
+    border-bottom: 1px solid black;
+  }
+  tr {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    border: 1px solid black;
+    margin-bottom: 0.6rem;
+    border-radius: 0.6rem;
+    overflow: hidden;
+  }
+  td::before{
+    content: attr(data-label);
+    float: left;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  td {
+    border: none;
+    border-bottom: 1px solid black;
+  }
+}
