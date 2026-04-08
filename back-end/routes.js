@@ -5,12 +5,13 @@ import {
   putPaciente,
   deletePaciente
 } from "./src/controllers/pacientes.js"
+import { checarId, checarCampos } from "./src/middlewares/middlewares.js"
 
 const router = Router()
 
 router.get("/", getPacientes)
-router.post("/", postPaciente)
-router.put("/:id", putPaciente)
-router.delete("/:id", deletePaciente)
+router.post("/", checarCampos, postPaciente)
+router.put("/:id", checarId, checarCampos, putPaciente)
+router.delete("/:id", checarId, deletePaciente)
 
 export default router

@@ -25,10 +25,11 @@ export async function postPaciente(request, response) {
 
 export async function putPaciente(request, response) {
   try {
+    let { nome, idade, telefone } = request.body
     const query = await ModelPaciente.findByIdAndUpdate({_id: request.params.id}, {
-      nome: request.body.nome,
-      idade: request.body.idade,
-      telefone: request.params.telefone
+      nome: nome,
+      idade: idade,
+      telefone: telefone
     })
     response.json({"Sucesso": `Usuário ${request.body.nome} atualizado com sucesso!`})
   } catch {
