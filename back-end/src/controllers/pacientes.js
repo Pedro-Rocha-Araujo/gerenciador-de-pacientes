@@ -9,6 +9,15 @@ export async function getPacientes(request, response) {
   }
 }
 
+export async function getPaciente(request, response) {
+  try {
+    const query = await ModelPaciente.findById(request.params.id)
+    response.json(query)
+  } catch {
+    response.json({"Erro": "Erro ao requerir os paciente me questão!"})
+  }
+}
+
 export async function postPaciente(request, response) {
   try {
     const query = await ModelPaciente.insertOne({
