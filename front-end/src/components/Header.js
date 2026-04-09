@@ -1,7 +1,7 @@
 function Header() {
     return (
         <header>
-            <h1>Pacientes <i class="fa-solid fa-briefcase-medical"></i></h1>
+            <h1>Pacientes <i className="fa-solid fa-briefcase-medical"></i></h1>
         </header>
     )
 }       

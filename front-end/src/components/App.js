@@ -1,8 +1,11 @@
-import React, {useState} from "react"
+import { useState, useEffect } from "react"
 import Header from "./Header"
 import Cadastro from "./Cadastro"
 import Tabela from "./Tabela"
-import './App.css';
+import axios from "axios"
+import { toast } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css'
+import { ToastContainer } from "react-toastify"
 
 function App() {
   const [paciente, setPaciente] = useState({
@@ -13,62 +16,73 @@ function App() {
   const [lista, setLista] = useState([])
   const [idEmEdicao, setId] = useState(null)
 
+  useEffect(()=> {
+    async function getPacientes() {
+      try {
+        const response = await axios.get("http://localhost:4000/")
+        setLista(response.data)
+      } catch {
+        console.log("Erro ao requerir os pacientes")
+      }
+    }
+    getPacientes()
+  }, [])
+
+
+
   function capturarMudanca(e) {
-    let nameInput = e.target.name
-    let conteudoDigitado = e.target.value 
+    const { name, value } = e.target
     setPaciente((prevValue)=>{
       return {
         ...prevValue,
-        [nameInput]: conteudoDigitado
+        [name]: value
       }
     })
   }
-  function adcionarPaciente(e) {
+
+  async function adicionarPaciente(e) {
     e.preventDefault()
-    setLista((prevValue)=>{
-      return [...prevValue, paciente]
-    })
-    setPaciente((prevValue)=>{
-      return {
+    try {
+      const response = await axios.post("http://localhost:4000/", {
+        nome: paciente.nome,
+        idade: paciente.idade,
+        telefone: paciente.telefone
+      })
+      toast.success("Usuário cadastrado!")
+    } catch {
+      toast.error("Erro ao cadastrar paciente!")
+    }
+    setPaciente({
         nome: "",
         idade: "",
-        telefone: "",
-      }
+        telefone: ""
     })
   }
-  function deletarPaciente(id) {
-    setLista((prevValue)=>{
-      return prevValue.filter((_,i)=>{
-        return i !== id
-      })
-    })
+
+  async function deletarPaciente(id) {
+    try {
+      const response = axios.delete(`http://localhost:4000/${id}`)
+      toast.success("Paciente deletado com sucesso!")
+    } catch {
+      toast.error("Erro ao deletar o paciente!")
+    }
   }
+
   function editarPaciente(id) {
-    setPaciente({
-      nome: lista[id].nome,
-      idade: lista[id].idade,
-      telefone: lista[id].telefone
-    })
-    setId(id)
+    try {
+      setId(id)
+    } catch {
+      toast.error("Erro ao buscat id")
+    }
   }
   function salvarEdicao(e) {
-    e.preventDefault()
-    setLista((prevValue)=>{
-      return prevValue.map((_,i)=>{
-        if(i===idEmEdicao){
-          return paciente
-        }else{
-          return _
-        }
-      })
-    })
-    setPaciente({
-      nome: "",
-      idade: "",
-      telefone: ""
-    })
-    setId(null)
+    try {
+      toast.success("Usuário editado com sucesso!")
+    } catch {
+      toast.error("Erro ao editar o paciente!")
+    }
   }
+
   return (
     <div className="App">
       <Header />
@@ -76,18 +90,19 @@ function App() {
         <Cadastro 
           onChange={capturarMudanca} 
           onId={idEmEdicao} 
-          onAdd={adcionarPaciente}
+          onAdd={adicionarPaciente}
           onSave={salvarEdicao} 
           nome={paciente.nome}
           idade={paciente.idade}
           telefone={paciente.telefone}
-          />
+        />
         <Tabela 
           lista={lista}
           onEdit={editarPaciente}
           onDelete={deletarPaciente}
         />
       </main>
+      <ToastContainer />
     </div>
   );
 }

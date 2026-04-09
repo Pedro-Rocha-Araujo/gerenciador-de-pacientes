@@ -1,3 +1,5 @@
+import { useEffect } from "react"
+
 function Tabela(props) {
     return (
         <section className='sec-cadastrados'>
@@ -13,18 +15,19 @@ function Tabela(props) {
                 </tr>
               </thead>
               <tbody>
-                {props.lista.map((_,i)=>{
+                {props.lista.map((paciente, index)=>{
                   return(
-                    <tr key={i} id={i}>
-                      <td data-label="Nome:">{_.nome}</td>
-                      <td data-label="Idade">{_.idade}</td>
-                      <td data-label="Telefone">{_.telefone}</td>
+                    <tr key={index} id={index}>
+                      <td data-label="Nome:">{paciente.nome}</td>
+                      <td data-label="Idade">{paciente.idade}</td>
+                      <td data-label="Telefone">{paciente.telefone}</td>
                       <td data-label="Opções:" className="opcoes">
                         <button className="btn-editar"
-                          onClick={()=>props.onEdit(i)}>
+                          onClick={()=>props.onEdit(paciente._id)}>
                           Editar
                         </button> 
-                        <button className="btn-deletar" onClick={()=>props.onDelete(i)}>
+                        <button className="btn-deletar" 
+                          onClick={()=>props.onDelete(paciente._id)}>
                           Deletar
                         </button>
                       </td>
