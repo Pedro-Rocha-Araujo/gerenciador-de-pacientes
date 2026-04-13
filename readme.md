@@ -1,5 +1,5 @@
 # Gerenciador de pacientes 🩺 🩹 💊
-### O presente respositório foi criado com o intuito de hospeda meus aprendizados como deenvolvedor fullstack
+### O presente respositório foi criado com o intuito de hospedar meus aprendizados como desenvolvedor fullstack
 ### Características do projeto:
 1- O backend do projeto foi feito utilizando NodeJs e está configurado para rodar na porta 4000
 
